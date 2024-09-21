@@ -15,7 +15,7 @@ buildscript {
 plugins {
     val ktVersion= "2.0.20"
     kotlin("android") version ktVersion
-    id("com.android.application") version "8.3.2"
+    id("com.android.application") version "8.5.2"
 }
 plugins.apply("io.gitlab.arturbosch.detekt")
 

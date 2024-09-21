@@ -1,0 +1,8 @@
+config:
+  validation: true
+  warningsAsErrors: true
+  checkExhaustiveness: false
+
+potential-bugs:
+  MissingSuperCall:
+    active: true

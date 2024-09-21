@@ -1,14 +1,26 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 
+val USE_SNAPSHOT = true
 buildscript {
+    val USE_SNAPSHOT = true
     repositories {
-        mavenLocal {
-            url = uri(File("/Users/matthewgroth/registered").resolve("maven").resolve("controlled"))
+        if (USE_SNAPSHOT) {
+            maven {
+                url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+            }
+        } else {
+            mavenLocal {
+                url =  uri(File("/Users/matthewgroth/registered").resolve("maven").resolve("controlled"))
+            }
         }
+
     }
     dependencies {
-        classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:local-snapshot")
+        classpath(
+            if (USE_SNAPSHOT)  "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:main-SNAPSHOT"
+            else "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:local-snapshot"
+        )
     }
 }
 
@@ -21,9 +33,17 @@ plugins.apply("io.gitlab.arturbosch.detekt")
 
 repositories {
     mavenCentral()
-    mavenLocal {
-        url = uri(File("/Users/matthewgroth/registered").resolve("maven").resolve("controlled"))
+    if (USE_SNAPSHOT) {
+        maven {
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots/")
+        }
     }
+    else {
+        mavenLocal {
+            url = uri(File("/Users/matthewgroth/registered").resolve("maven").resolve("controlled"))
+        }
+    }
+
     google()
 }
 
@@ -58,4 +78,5 @@ tasks.register("allDetekt") {
 
 extensions.configure(DetektExtension::class.java) {
     debug = true
+    config.from(file("detekt.yml"))
 }

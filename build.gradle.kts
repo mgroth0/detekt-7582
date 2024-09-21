@@ -13,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    val ktVersion= "2.0.20-RC"
+    val ktVersion= "2.0.20"
     kotlin("android") version ktVersion
     id("com.android.application") version "8.3.2"
 }

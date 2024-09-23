@@ -4,5 +4,11 @@ config:
   checkExhaustiveness: false
 
 potential-bugs:
+  active: true
   MissingSuperCall:
+    active: true
+
+empty-blocks:
+  active: true
+  EmptyCatchBlock:
     active: true

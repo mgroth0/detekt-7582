@@ -10,6 +10,11 @@ class MyComposeAndroidActivity : ComponentActivity() {
     override fun onDestroy() {
         runBlocking {
             Thread.sleep(ONE_SECOND)
+            try {
+
+            } catch(e: Exception) {
+
+            }
         }
     }
 }
